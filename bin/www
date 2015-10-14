@@ -8,9 +8,17 @@ var app = require('../app');
 var debug = require('debug')('token-auth:server');
 var http = require('http');
 var mongoose = require('mongoose');
-var databaseConf = require('../config/databaseConf.js')
+var databaseConfig = require('../config/databaseConfig.js')
 
-mongoose.connect(databaseConf);
+switch(process.env.ENV){
+  case 'production':
+    mongoose.connect(databaseConfig.MONGO_PRODUCION);
+    break;
+  case 'test':
+    mongoose.connect(databaseConfig.MONGO_TEST);
+  default:
+    mongoose.connect(databaseConfig.MONGO_DEVELOPMENT);
+}
 
 /**
  * Get port from environment and store in Express.

@@ -17,7 +17,8 @@
       })
       .state('profile.show', {
         url: '',
-        templateUrl: 'javascripts/routes/user/profile/show/profile-show.template.html'
+        templateUrl: 'javascripts/routes/user/profile/show/profile-show.template.html',
+        controller: 'ProfileShowController'
       })
       .state('profile.edit', {
         url: '/edit',

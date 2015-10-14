@@ -2,9 +2,11 @@
   angular.module('profileApp')
     .service('authService', authService);
 
-  function authService($http, $localStorage){
+  function authService($http, $localStorage, apiConstant){
+    var apiUrl = apiConstant.url;
+
     this.login = function(user){
-      return $http.post('/users/authenticate', user).then(res => {
+      return $http.post(`${apiUrl}/users/authenticate`, user).then(res => {
         $localStorage.token = res.data.token;
 
         return res;
@@ -16,7 +18,7 @@
     }
 
     this.getUserLoggedIn = function(){
-      return $http.get('/users/logged-in')
+      return $http.get(`${apiUrl}/users/logged-in`)
         .then(user => user.data);
     }
   }
